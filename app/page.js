@@ -8,6 +8,7 @@ import data from "../wishes.json";
 
 const wishFont = Handlee({ subsets: ['latin'], weight: ['400'] })
 export default function Home() {
+
   const container_1 = useRef(null)
   const container_2 = useRef(null)
   const container_3 = useRef(null)
@@ -15,7 +16,23 @@ export default function Home() {
   const [hasLoaded, setHasLoaded] = useState(false)
   const [w, setW] = useState(0)
   const [h, setH] = useState(0)
+  const [loading, setIsLoading] = useState(0)
   const { width, height } = useWindowSize()
+
+  useEffect(() => {
+    window.addEventListener('load', () => {
+      // This function will run after the entire page has finished loading
+      setIsLoading(false);
+    });
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('load', () => {
+        setIsLoading(false);
+      });
+    };
+  }, []);
+
 
   const loadAnimations = () => {
     Lottie.loadAnimation({
@@ -58,7 +75,7 @@ export default function Home() {
     return (() => setHasLoaded(true))
   }, [])
 
-
+  if (loading) return <div className="flex min-w-full min-h-screen items-center justify-center"><span>🥳</span></div>; // Display loading message or spinner
   return (
     <div className="min-h-screen relative overflow-hidden py-10 px-24 custom-cursor "  >
       <ReactConfetti width={w} height={h} className="opacity-40" />
