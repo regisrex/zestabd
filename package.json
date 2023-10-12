@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.5.3",
+    "lottie-web": "^5.12.2",
+    "next": "13.5.4",
     "react": "^18",
+    "react-confetti": "^6.1.0",
     "react-dom": "^18",
-    "next": "13.5.4"
+    "react-use": "^17.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^10",
