@@ -13,6 +13,8 @@ export default function Home() {
   const container_3 = useRef(null)
   const container_4 = useRef(null)
   const [hasLoaded, setHasLoaded] = useState(false)
+  const [w, setW] = useState(0)
+  const [h, setH] = useState(0)
   const { width, height } = useWindowSize()
 
   const loadAnimations = () => {
@@ -51,13 +53,15 @@ export default function Home() {
   useEffect(() => {
     if (hasLoaded) return
     loadAnimations();
+    setW(window.innerWidth)
+    setH(window.innerHeight)
     return (() => setHasLoaded(true))
   }, [])
 
 
   return (
     <div className="min-h-screen relative overflow-hidden py-10 px-24 custom-cursor "  >
-      <ReactConfetti width={width} height={height} className="opacity-40" />
+      <ReactConfetti width={w} height={h} className="opacity-40" />
       <main className="">
         <div className="w-[30vw] absolute top-10 right-10" ref={container_1}></div>
         <div className="w-80 absolute bottom-10 left-10 animate-spin" ref={container_2}></div>
